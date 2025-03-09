@@ -1,0 +1,17 @@
+{
+    "admins": [
+      {
+        "name": "Vishwayishwaran T L",
+        "email": "vishwayishwaran@gmail.com",
+        "password": "04092004",
+        "role": "admin"
+      },
+      {
+        "name": "VasanthaKrishnan",
+        "email": "VasanthaKrishnan@gmail.com",
+        "password": "06092004",
+        "role": "admin"
+      }
+    ]
+  }
+  

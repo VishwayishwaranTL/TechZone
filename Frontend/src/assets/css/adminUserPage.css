@@ -1,0 +1,50 @@
+/* adminUserPage.css */
+
+.adminContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    padding: 20px;
+    font-family: sans-serif;
+    background-color: #f4f4f4; /* Light background for the page */
+  }
+  
+  .adminContainer h1 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .adminDetails {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 400px; 
+    text-align: left; 
+  }
+  
+  .adminDetails p {
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .adminDetails strong {
+    font-weight: bold;
+    margin-right: 5px;
+    color: #333; 
+  }
+  
+
+  .loading {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    margin-top: 20px; 
+  }
+  
+  .error {
+    color: #d32f2f; 
+    text-align: center;
+    margin-top: 20px;
+  }

@@ -1,0 +1,143 @@
+.dashboardContainer {
+  display: flex;
+  flex-direction: column; 
+  align-items: flex-start; 
+  padding: 20px;
+  font-family: sans-serif;
+  width: 100%; 
+}
+
+.dashboardHeading {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.dashAddProductBtn {
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.showModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.showModalContainer {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 50%;
+}
+
+.showHeading {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.showDetails {
+  width: calc(100% - 22px); 
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; 
+}
+
+.showBtnContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.showCancel {
+  background-color: #f44336; 
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.showAddUpdate {
+  background-color: #4CAF50; 
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.dashUserContainer, .dashAdminContainer, .dashProductContainer {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.dashUserHeading, .dashAdminHeading, .dashProductHeading {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.dashUserTable, .adminTable, .productTable {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+.userRow, .adminRow, .productRow {
+    background-color: #f2f2f2;
+}
+
+.userHead, .adminHead, .productHead {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.userValue, .adminValue, .productValue {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.dashProductUpdateBtn, .dashProductDeleteBtn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px; 
+}
+
+.dashProductUpdateBtn {
+    background-color: #ffc107; 
+    color: #000;
+}
+
+.dashProductDeleteBtn {
+    background-color: #d9534f;
+    color: white;
+}
+
+.error {
+    color: red;
+    margin-top: 10px; 
+}
