@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../css/dashboard.css";
+import "../assets/css/dashboard.css";
 
 const AddProductModal = ({ isOpen, onClose, onAdd, productToUpdate, onUpdate }) => {
   const [productDetails, setProductDetails] = useState({

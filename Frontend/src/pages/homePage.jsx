@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import '../css/homePage.css';
+import '../assets/css/homePage.css';
 import { useEffect } from "react";
 
 function HomePage() {

@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import StarRating from "../../../starRating.jsx";
-import "../css/productIdPage.css";
+import StarRating from "../../starRating";
+import "../assets/css/productIdPage.css";
 
 function ProductIdPage() {
     const BASE_URL = import.meta.env.VITE_BASE_URL;

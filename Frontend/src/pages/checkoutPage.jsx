@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../css/checkoutPage.css";
+import "../assets/css/checkoutPage.css";
 
 const CheckoutPage = () => {
     const BASE_URL = import.meta.env.VITE_BASE_URL;

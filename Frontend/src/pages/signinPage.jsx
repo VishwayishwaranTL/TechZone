@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../css/signinPage.css';
+import '../assets/css/signinPage.css';
 
 function SigninPage() {
     const BASE_URL = import.meta.env.VITE_BASE_URL;

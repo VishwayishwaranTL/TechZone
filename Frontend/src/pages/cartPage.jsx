@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../css/cartPage.css";
+import "../assets/css/cartPage.css";
 
 function CartPage() {
     const BASE_URL = import.meta.env.VITE_BASE_URL;

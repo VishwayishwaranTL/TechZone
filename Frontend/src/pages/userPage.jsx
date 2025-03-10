@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
-import "../css/userPage.css";
+import "../assets/css/userPage.css";
 
 function UserPage() {
     const BASE_URL = import.meta.env.VITE_BASE_URL;

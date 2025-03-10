@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
-import "../css/paymentSuccessPage.css";
+import "../assets/css/paymentSuccessPage.css";
 
 const PaymentSuccessPage = () => {
     const BASE_URL = import.meta.env.VITE_BASE_URL;

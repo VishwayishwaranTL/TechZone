@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../css/myOrderPage.css"
+import "../assets/css/myOrderPage.css"
 
 const MyOrders = () => {
     const BASE_URL = import.meta.env.VITE_BASE_URL;

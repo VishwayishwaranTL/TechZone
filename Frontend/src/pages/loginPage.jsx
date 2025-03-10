@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import '../css/adminPage.css';
+import { useNavigate, Link } from "react-router-dom";
+import '../assets/css/loginPage.css';
 
-function AdminPage() {
+function LoginPage() {
     const BASE_URL = import.meta.env.VITE_BASE_URL;
+    console.log(BASE_URL)
 
     const [formData, setFormData] = useState({
         email: "",
         password: ""
     });
-
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -22,46 +22,39 @@ function AdminPage() {
             alert("Please fill in all required fields.");
             return;
         }
-
+    
         try {
-            const response = await fetch(`${BASE_URL}/api/admin/login`, { 
+            const response = await fetch(`${BASE_URL}/api/user/login`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json"},
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password })
             });
-
-            if (!response.ok) {
-                const errorMessage = await response.text();
-                throw new Error(errorMessage || "Login failed. Please try again.");
-            }
-
+    
             const data = await response.json();
-
-            if (data.success && data.token) {
-                localStorage.setItem("adminToken", data.token);
-                const token = localStorage.getItem("adminToken");
-                console.log(token);
-                alert("Admin Login Successful");
-                navigate("/admin/dashboard");  
-                
-                console.log("Token:", data.token);
+    
+            if (data.success && data.token) {  
+                localStorage.setItem("token", data.token);  
+                console.log("Token",data.token);
+                alert("Login Successful");
+                navigate("/");  
             } else {
-                alert(data.message || "Login failed.");
+                alert(data.message);
             }
         } catch (error) {
-            console.error("Login Error:", error.message);
-            alert(error.message);
+            console.error("Error during login:", error);
+            alert("An error occurred. Please try again.");
         }
     };
+    
 
     return (
-        <div className="adminContainer">
-            <h1>Admin Login</h1>
-            <div className="adminDetails">
+        <div className="signupContainer">
+            <h1>Login Details</h1>
+            <div className="details">
                 <label htmlFor="email">Email Id<span>*</span></label>
                 <input
                     type="text"
-                    placeholder="Enter Admin Email"
+                    placeholder="Enter Your Mail ID"
                     id="email"
                     value={formData.email}
                     onChange={handleChange}
@@ -71,17 +64,19 @@ function AdminPage() {
                 <label htmlFor="password">Password<span>*</span></label>
                 <input
                     type="password"
-                    placeholder="Enter Admin Password"
+                    placeholder="Enter Your Password"
                     id="password"
                     value={formData.password}
                     onChange={handleChange}
                     required
                 />
 
-                <button className="adminButton" onClick={handleSubmit}>Login</button>
+                <p>Don't have an Account? <Link to="/signin">SignUp</Link></p>
+
+                <button className="signupButton" onClick={handleSubmit}>Login</button>
             </div>
         </div>
     );
 }
 
-export default AdminPage;
+export default LoginPage;
