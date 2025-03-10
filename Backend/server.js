@@ -11,10 +11,11 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: "*",
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"]
+  origin: "*",  // Allows all origins (not secure for production)
+  methods: "GET, POST, PUT, DELETE",
+  allowedHeaders: "Content-Type, Authorization"
 }));
+
 
 const PORT = 5000;
 
