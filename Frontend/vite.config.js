@@ -3,10 +3,10 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "./",
+  base: "/", // Change this to an absolute path
   build: {
     outDir: "dist",
-    chunkSizeWarningLimit: 1000, // Increase limit to 1000 KB (default is 500 KB)
+    chunkSizeWarningLimit: 1000
   },
   server: {
     historyApiFallback: true
