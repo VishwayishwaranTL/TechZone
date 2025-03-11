@@ -4,7 +4,6 @@ import '../assets/css/loginPage.css';
 
 function LoginPage() {
     const BASE_URL = import.meta.env.VITE_BASE_URL;
-    console.log(BASE_URL)
 
     const [formData, setFormData] = useState({
         email: "",
@@ -34,7 +33,6 @@ function LoginPage() {
     
             if (data.success && data.token) {  
                 localStorage.setItem("token", data.token);  
-                console.log("Token",data.token);
                 alert("Login Successful");
                 navigate("/");  
             } else {

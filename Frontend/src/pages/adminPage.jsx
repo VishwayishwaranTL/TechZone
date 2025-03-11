@@ -40,11 +40,8 @@ function AdminPage() {
             if (data.success && data.token) {
                 localStorage.setItem("adminToken", data.token);
                 const token = localStorage.getItem("adminToken");
-                console.log(token);
                 alert("Admin Login Successful");
-                navigate("/admin/dashboard");  
-                
-                console.log("Token:", data.token);
+                navigate("/admin/dashboard");                  
             } else {
                 alert(data.message || "Login failed.");
             }
