@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema(
         address: { type: String, required: false }, 
         phone: { 
             type: String,  
-            unique: true, 
             default:""
         }
     },
