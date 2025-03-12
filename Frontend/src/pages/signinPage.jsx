@@ -38,7 +38,6 @@ function SigninPage() {
             });
 
             const data = await response.json();
-            console.log(data)
             if (data.success) {
                 alert('Signup Successful. Please Login.');
                 window.location.href = "/login"; 

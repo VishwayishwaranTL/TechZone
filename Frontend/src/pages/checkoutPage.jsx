@@ -9,6 +9,7 @@ const CheckoutPage = () => {
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0);
     const [userDetails, setUserDetails] = useState({ address: "", phone: "", email: "" });
+    const [updatedUser, setUpdatedUser] = useState({});
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -17,20 +18,20 @@ const CheckoutPage = () => {
             navigate("/login");
             return;
         }
-
+    
         const storedCart = JSON.parse(localStorage.getItem("cart")) || {};
         const cartItems = Object.values(storedCart);
-
+    
         const calculatedTotal = cartItems.reduce((acc, product) => {
             const discountedPrice = product.discount
                 ? product.price - (product.price * product.discount) / 100
                 : product.price;
             return acc + discountedPrice * product.quantity;
         }, 0);
-
+    
         setCart(cartItems);
         setTotal(calculatedTotal);
-
+    
         const fetchUserProfile = async () => {
             try {
                 const response = await fetch(`${BASE_URL}/api/user/profile`, {
@@ -40,23 +41,29 @@ const CheckoutPage = () => {
                         "Content-Type": "application/json",
                     },
                 });
-
+    
                 if (!response.ok) {
                     throw new Error("Failed to fetch user details");
                 }
-
+    
                 const data = await response.json();
-
+    
                 if (data.success && data.data) {
                     setUserDetails({
+                        _id: data.data._id || "", 
                         address: data.data.address || "",
                         phone: data.data.phone || "",
                         email: data.data.email || "",
                     });
-
+                    
+    
+                    setUpdatedUser({
+                        address: data.data.address || "",
+                        phone: data.data.phone || "",
+                    });
+    
                     if (!data.data.address || !data.data.phone) {
                         alert("Please update your address and phone number before proceeding.");
-                        navigate("/user");
                     }
                 } else {
                     throw new Error("User data retrieval failed.");
@@ -66,11 +73,15 @@ const CheckoutPage = () => {
                 alert("Failed to retrieve user details. Please try again.");
             }
         };
-
+    
         fetchUserProfile();
     }, [navigate]);
 
     const handlePayment = async () => {
+        if (!userDetails.email || !userDetails.address || !userDetails.phone) {
+            alert("Please ensure your email, address, and phone number are filled before proceeding.");
+            return;
+        }
         try {
             const token = localStorage.getItem("token");
             const gstRate = 0.18;
@@ -129,6 +140,59 @@ const CheckoutPage = () => {
         }
     };
     
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setUpdatedUser((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleFieldUpdate = async (field) => {
+        const newValue = updatedUser[field];
+    
+        if (!newValue || newValue.trim() === "") {
+            alert(`Please enter a valid ${field} before updating.`);
+            return;
+        }
+    
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                console.error("No token found!");
+                navigate("/login");
+                return;
+            }
+    
+            if (!userDetails._id) {
+                console.error("User ID is missing!");
+                return;
+            }
+    
+            const response = await fetch(`${BASE_URL}/api/user/update/${userDetails._id}`, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ [field]: newValue }),
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Failed to update ${field}`);
+            }
+    
+            const data = await response.json();
+            if (data.success) {
+                setUserDetails((prev) => ({ ...prev, [field]: newValue }));
+                setUpdatedUser((prev) => ({ ...prev, [field]: newValue }));
+    
+                alert(`${field.charAt(0).toUpperCase() + field.slice(1)} updated successfully!`);
+            } else {
+                throw new Error(data.message || "Update failed");
+            }
+        } catch (error) {
+            console.error(`Error updating ${field}:`, error);
+            alert(`Error updating ${field}: ${error.message}`);
+        }
+    };
     
 
     return (
@@ -178,8 +242,28 @@ const CheckoutPage = () => {
             <div className="userDetails">
                 <h3>Shipping Details</h3>
                 <p><strong>Email:</strong> {userDetails.email}</p>
-                <p><strong>Address:</strong> {userDetails.address}</p>
-                <p><strong>Phone:</strong> {userDetails.phone}</p>
+                <p><strong>Address:</strong>
+                    <input
+                        type="text"
+                        name="address"
+                        value={updatedUser.address ?? userDetails.address ?? ""}
+                        onChange={handleInputChange}
+                        placeholder="Enter Address"
+                    />
+                    <button onClick={() => handleFieldUpdate("address")}>Update</button>
+                </p>
+
+                <p><strong>Phone No:</strong>
+                    <input
+                        type="text"
+                        name="phone"
+                        value={updatedUser.phone ?? userDetails.phone ?? ""}
+                        onChange={handleInputChange}
+                        placeholder="Enter Phone Number"
+                    />
+                    <button onClick={() => handleFieldUpdate("phone")}>Update</button>
+                </p>
+
             </div>
 
             {cart.length > 0 && (

@@ -2,6 +2,8 @@ import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+const getTimestamp = () => new Date().toISOString();
+
 export const registerUser = async (req, res) => {
     try {
         const { firstName, lastName, dob, email, password } = req.body;
@@ -27,6 +29,9 @@ export const registerUser = async (req, res) => {
         });
 
         await newUser.save();
+
+        console.log(`[${getTimestamp()}] User Registered: ${email}, Name: ${firstName} ${lastName}`);
+
         res.status(201).json({ success: true, message: "User registered successfully!" });
     } catch (error) {
         console.error("SignUp error:", error.message);
@@ -54,12 +59,15 @@ export const loginUser = async (req, res) => {
 
         const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET);
 
+        console.log(`[${getTimestamp()}] User Logged In: ${email}`);
+
         res.status(200).json({ success: true, message: "Login successful", token, user: { id: user._id, firstName: user.firstName, email: user.email } });
     } catch (error) {
-        console.error("Login Error:", error);
+        console.error("Login Error:", error.message);
         res.status(500).json({ success: false, message: "Server Error" });
     }
 };
+
 
 export const getUserProfile = async (req, res) => {
     try {

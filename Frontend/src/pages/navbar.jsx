@@ -16,11 +16,16 @@ function Navbar() {
     }, [location.pathname]);
 
     const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("adminToken");
-        setLogin(false);
-        setAdmlogin(false);
-        navigate("/");
+        const confirmLogout = window.confirm("Are you sure you want to log out?");
+        if (!confirmLogout){
+            return;
+        }else{
+            localStorage.removeItem("token");
+            localStorage.removeItem("adminToken");
+            setLogin(false);
+            setAdmlogin(false);
+            navigate("/");
+        }
     };
 
     return (
