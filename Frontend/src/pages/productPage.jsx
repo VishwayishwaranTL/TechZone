@@ -156,6 +156,11 @@ function ProductPage() {
                                         </button>
                                     ) : (
                                         <div className="cartControls">
+                                            <button 
+                                            onClick={(e) => handleDecreaseQuantity(e, product._id)} 
+                                            disabled={cart[product._id]?.quantity == 1}
+                                            style={{cursor: cart[product._id]?.quantity == 1 ? "not-allowed" : "pointer",}}>-</button>
+                                            <p>{cart[product._id]?.quantity || 0}</p>
                                             <button
                                                 onClick={(e) => handleIncreaseQuantity(e, product._id, product)}
                                                 disabled={cart[product._id]?.quantity >= product.stock}
@@ -165,11 +170,6 @@ function ProductPage() {
                                             >
                                                 +
                                             </button>
-                                            <p>{cart[product._id]?.quantity || 0}</p>
-                                            <button 
-                                            onClick={(e) => handleDecreaseQuantity(e, product._id)} 
-                                            disabled={cart[product._id]?.quantity == 1}
-                                            style={{cursor: cart[product._id]?.quantity == 1 ? "not-allowed" : "pointer",}}>-</button>
                                         </div>
                                     )}
                                     {cart[product._id]?.quantity === product.stock && <p className="alert">*Max Stock Limit Reached</p>}
